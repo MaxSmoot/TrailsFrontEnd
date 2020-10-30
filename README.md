@@ -1,5 +1,5 @@
 # trails
-
+Front End for Social Media Application for CS3490
 ## Project setup
 ```
 npm install

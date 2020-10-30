@@ -1,25 +1,50 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import useLogin from '../auth/useLogin';
+const isLoggedIn = useLogin();
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "FrontPage",
+    component: () => import("../views/FrontPage.vue"),
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
-
+    path: "/home",
+    name: "Home",
+    component: () => import("../views/LoggedInUsers/Home.vue"),
+  },
+  {
+    path: "/circles",
+    name: "Circles",
+    component: () => import("../views/LoggedInUsers/Circles.vue"),
+  },
+  {
+    path: "/pages",
+    name: "Pages",
+    component: () => import("../views/LoggedInUsers/Pages.vue"),
+  },
+  {
+    path: "/Profile",
+    name: "Profile",
+    component: () => import("../views/LoggedInUsers/Profile.vue"),
+  },
+  {
+    path: "/explore",
+    name: "Explore",
+    component: () => import("../views/LoggedInUsers/Explore.vue"),
+  },
+];
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
-})
+  history: createWebHistory(),
+  routes,
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.name != "FrontPage" && !isLoggedIn.value) {
+    next({ name: "FrontPage" });
+  } else if (to.name == 'FrontPage' && isLoggedIn.value){
+    next({name: 'Home'})
+  } else{
+    next();
+  }
+});
+export default router;

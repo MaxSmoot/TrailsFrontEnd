@@ -1,0 +1,7 @@
+{
+    "emailPattern": "^([a-zA-Z0-9]){1,64}@([a-zA-Z]){1,255}\\.([a-zA-Z]){1,16}$",
+    "firstNamePattern": "^([a-zA-Z]){2,50}$",
+    "lastNamePattern":  "^([a-zA-Z]){2,50}$",
+    "usernamePattern": "^([a-zA-Z0-9-_]){3,30}$",
+    "passwordPattern": "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+}
