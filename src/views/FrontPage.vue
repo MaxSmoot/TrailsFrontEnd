@@ -128,6 +128,7 @@ h1 {
   z-index: -1;
 }
 button {
+  cursor: pointer;
   font-size: 2rem;
   display: block;
   width: 20rem;

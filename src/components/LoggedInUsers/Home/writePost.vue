@@ -58,7 +58,8 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import './../../../styles/variables.scss';
 textarea {
   font-family: "Roboto", sans-serif;
   border: none;
@@ -90,10 +91,10 @@ button {
   color: white;
   padding: 0.5em 1.2em;
   font-size: 1.2rem;
-  background-color: #56d39b;
+  background-color: $primary_color;
 }
 button:hover {
-  background-color: #00c985;
+  background-color: $primary_color_hover;
 }
 #count {
   font-size: 0.9rem;
@@ -105,9 +106,6 @@ button:hover {
   clear: left;
 }
 
-.red {
-  color: red;
-}
 form {
   overflow: hidden;
   /* width: 100%; */

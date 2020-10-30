@@ -32,7 +32,7 @@
         >
       </li>
       <li class="postSVG">
-        <span style="color: #56d39b" class="icon-pen" @click="showPost"></span>
+        <span id="writePostIcon" class="icon-pen" @click="showPost"></span>
       </li>
       <li>
         <button class="navWord" id="holler" type="button" @click="showPost">
@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script lang = 'ts'>
+<script lang="ts">
 import { useRoute } from "vue-router";
 import { defineComponent } from "vue";
 export default defineComponent({
@@ -66,14 +66,13 @@ export default defineComponent({
 });
 </script>
 
-
-<style scoped>
+<style lang="scss" scoped>
 @import "./../../assets/leftNavbarIcons/style.css";
+@import "../../styles/variables.scss";
 #leftNavbarWrapper {
   display: inline-block;
   height: 100vh;
   overflow-y: scroll;
-  -ms-overflow-style: hidden;
   scrollbar-width: none;
 }
 #leftNavbarWrapper::-webkit-scrollbar {
@@ -96,15 +95,16 @@ li {
   list-style: none;
   font-size: 2rem;
   margin-top: 8vh;
+  a {
+    text-decoration: none;
+    color: black;
+  }
 }
-li a {
-  text-decoration: none;
-  color: black;
-}
+
 #holler {
   border: none;
   outline: none;
-  background-color: #56d39b;
+  background-color: $primary_color;
   color: white;
   font-size: 1.5rem;
   border-radius: 2rem;
@@ -115,10 +115,10 @@ li a {
   cursor: pointer;
 }
 #holler:hover {
-  background-color: #00c985;
+  background-color: $primary_color_hover;
 }
 .currentPage a {
-  color: #56d39b;
+  color: $primary_color;
 }
 
 @media screen and (max-width: 815px) {
@@ -139,5 +139,8 @@ li a {
   .postSVG {
     display: none;
   }
+}
+#writePostIcon{
+  color: $primary_color;
 }
 </style>
