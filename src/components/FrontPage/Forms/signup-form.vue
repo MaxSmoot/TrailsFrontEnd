@@ -27,90 +27,53 @@
 
 <script>
 import { validate } from "../../Forms/HelperModules/validation";
+import {computed, ref, defineComponent} from 'vue';
 
-export default {
+export default defineComponent({
   name: "signup-form",
-  data() {
-    return {
-      email: "",
-      firstName: "",
-      lastName: "",
-      username: "",
-      password: "",
-      emailEntered: false,
-    };
-  },
-  computed: {
+  setup(props, {emit}){
+    const email = ref("");
+    const emailEntered = ref(false);
+    const firstName = ref("");
+    const lastName = ref("");
+    const username = ref("");
+    const password = ref("");
+    const validEmail = computed(() => validate("email", email.value));
+    const validFirstName = computed(() => validate("name", firstName.value));
+    const validLastName = computed(() => validate("name", lastName.value));
+    const validUsername = computed(() => validate("username", username.value));
+    const validPassword = computed(() => validate("password", password.value));
+    const passwordFocused = computed(() => password.value.length > 0 && !validPassword.value);
+    const validForm = computed(() => validEmail.value && validFirstName.value && validLastName.value && validUsername.value && validPassword.value);
     /**
-     * Check if the user is typing in the password field - can be accessed in variable passwordFocused (NOT by calling the function)
-     * @return {Boolean} Whether or not the user is typing in the password input
+     * @todo implement form submission
      */
-    passwordFocused() {
-      return !this.validPassword && this.password.length > 0;
-    },
-    /**
-     * Validate the Email input - can be accessed in variable validEmail (NOT by calling the function)
-     * @return {Boolean} Whether or not the email input is valid
-     */
-    validEmail() {
-      return validate("email", this.email);
-    },
-    /**
-     * Validate the First Name input - can be accessed in variable validFirstName (NOT by calling the function)
-     * @return {Boolean} Whether or not the First Name input is valid
-     */
-    validFirstName() {
-      return validate("name", this.firstName);
-    },
-    /**
-     * Validate the Last Name input - can be accessed in variable validPassword (NOT by calling the function)
-     * @return {Boolean} Whether or not the Last Name input is valid
-     */
-    validLastName() {
-      return validate("name", this.lastName);
-    },
-    /**
-     * Validate the Username input - can be accessed in variable validUsername (NOT by calling the function)
-     * @return {Boolean} Whether or not the Username input is valid
-     * @todo Check the username against the database to make sure it is not taken
-     */
-    validUsername() {
-      return validate("username", this.username);
-    },
-    /**
-     * Validate the Password input - can be accessed in variable validPassword (NOT by calling the function)
-     * @return {Boolean} Whether or not the Password input is valid
-     */
-    validPassword() {
-      return validate("password", this.password);
-    },
-    /**
-     * Validate the Form - can be accessed in variable validPassword (NOT by calling the function)
-     * @return {Boolean} Whether or not the Form is valid
-     */
-    validForm() {
-      return (
-        this.validEmail &&
-        this.validFirstName &&
-        this.validLastName &&
-        this.validUsername &&
-        this.validPassword
-      );
-    },
-  },
-  methods: {
-    /**
-     * Handles the form submission
-     * @todo implement communication to the backend
-     */
-    onSubmit() {
-      console.log("submmited");
-    },
-    close() {
-      this.$emit("close");
-    },
-  },
-};
+    function onSubmit() {
+      alert("submit not implemented yet");
+    }
+
+    function close(){
+      emit("close");
+    }
+    return{
+      email,
+      firstName,
+      lastName,
+      username,
+      password,
+      validEmail,
+      validFirstName,
+      validLastName,
+      validUsername,
+      validPassword,
+      validForm,
+      passwordFocused,
+      onSubmit,
+      close,
+      emailEntered
+    }
+  }
+});
 </script>
 <style lang='scss' scoped>
     @import '../../../styles/forms.scss';
