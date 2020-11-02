@@ -35,55 +35,41 @@
 <script>
 import { validate } from "../../Forms/HelperModules/validation";
 import useLogin from "../../../auth/useLogin";
-
-export default {
+import { defineComponent, ref, computed } from "vue";
+import { useRouter } from "vue-router";
+export default defineComponent({
   name: "login-form",
-  data() {
+  setup(props, { emit }) {
+    const route = useRouter();
+    const email = ref("");
+    const password = ref("");
+    const loggedIn = useLogin();
+    const validEmail = computed(() => validate("email", email.value));
+    const validPassword = computed(() => password.value.length > 0);
+    const validForm = computed(() => validPassword.value && validEmail.value);
+
+    function onSubmit() {
+      loggedIn.value = true;
+      route.push({ name: "Home" });
+    }
+
+    function close() {
+      emit("close");
+    }
+
     return {
-      email: "",
-      password: "",
-      loggedIn: useLogin(),
-    };
-  },
-  computed: {
-    /**
-     * Validate the Email input - can be accessed in variable validEmail (NOT by calling the function)
-     * @return {Boolean} Whether or not the Email input is valid
-     */
-    validEmail() {
-      return validate("email", this.email);
-    },
-    /**
-     * Validate the Password input - can be accessed in variable validPassword (NOT by calling the function)
-     * @return {Boolean} Whether or not the Password input is valid
-     */
-    validPassword() {
-      return this.password.length > 0;
-    },
-    /**
-     * Validate the Entire Form  - can be accessed in variable validForm (NOT by calling the function)
-     * @return {Boolean} Whether or not the entire form is valid
-     */
-    validForm() {
-      return this.validEmail && this.validPassword;
-    },
-  },
-  methods: {
-    /**
-     * Handles the Form submission
-     * @todo implement communication with the server
-     */
-    onSubmit() {
-      this.loggedIn = true;
-      this.$router.push({ name: "Home" });
-    },
-    close() {
-      this.$emit("close");
-    },
-  },
-};
+      email,
+      password,
+      validEmail,
+      validPassword,
+      validForm,
+      close,
+      onSubmit,
+    }
+  }
+});
 </script>
 
-<style lang='scss' scoped>
-    @import '../../../styles/forms.scss';
+<style lang="scss" scoped>
+@import "../../../styles/forms.scss";
 </style>
