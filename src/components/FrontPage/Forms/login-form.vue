@@ -47,7 +47,10 @@ export default defineComponent({
     const validEmail = computed(() => validate("email", email.value));
     const validPassword = computed(() => password.value.length > 0);
     const validForm = computed(() => validPassword.value && validEmail.value);
-
+    /**
+     * @todo implement fetch to server and user auth
+     * for now it just sets the global state as if the user was logged in
+     */
     function onSubmit() {
       loggedIn.value = true;
       route.push({ name: "Home" });
@@ -65,8 +68,8 @@ export default defineComponent({
       validForm,
       close,
       onSubmit,
-    }
-  }
+    };
+  },
 });
 </script>
 
