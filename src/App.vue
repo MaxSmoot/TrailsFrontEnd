@@ -7,6 +7,24 @@
   </div>
 </template>
 
+<script lang='ts'>
+import { defineComponent, watch } from "vue";
+import useAuth from './auth/useAuth';
+import {useRouter} from 'vue-router';
+
+export default defineComponent({
+  setup() {
+    const user = useAuth();
+    const route = useRouter();
+    watch(user, () => {
+      if (!user.token) {
+        route.push('FrontPage');
+      }
+    })
+  }
+});
+</script>
+
 <style lang="scss">
 html {
   min-height: 100%;

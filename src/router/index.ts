@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import useLogin from '../auth/useLogin';
-const isLoggedIn = useLogin();
+import useAuth from '../auth/useAuth';
+const auth = useAuth();
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -39,9 +39,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name != "FrontPage" && !isLoggedIn.value) {
+  if (to.name != "FrontPage" && !auth.token) {
     next({ name: "FrontPage" });
-  } else if (to.name == 'FrontPage' && isLoggedIn.value){
+  } else if (to.name == 'FrontPage' && auth.token){
     next({name: 'Home'})
   } else{
     next();

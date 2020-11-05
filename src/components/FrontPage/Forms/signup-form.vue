@@ -1,14 +1,15 @@
 <template>
     <div id="wrapper">
-        <form @submit.prevent="onSubmit" class="form">
+        <form @submit.prevent class="form">
             <img class="x" src='../../../assets/x.svg' @click="close">
          <h2>Sign Up</h2>
          <p><input type="email" placeholder="Email" id="emailbox" v-model.trim="email" :class="{invalid:!validEmail, valid:validEmail}"></p>
          <button type="button" v-on:click="emailEntered = true" :disabled="!validEmail" :class="{disabled:!validEmail}" v-if="!emailEntered">Sign Up</button>
          <div id="fullForm" v-if="emailEntered">
+            <p><input type="text" id="username" placeholder="Username" v-model.trim="username" :class="{invalid:!validUsername, valid:validUsername}"></p>
             <p><input type="text" placeholder="First Name" id="firstName" v-model.trim="firstName" :class="{invalid:!validFirstName, valid:validFirstName}"></p>
             <p><input type="text" id="lastName" placeholder="Last Name" v-model.trim="lastName" :class="{invalid:!validLastName, valid:validLastName}"></p>
-            <p><input type="text" id="username" placeholder="Username" v-model.trim="username" :class="{invalid:!validUsername, valid:validUsername}"></p>
+            <p><input type="tel" id="phoneNumber" v-model="phoneNumber" placeholder="Phone Number" maxlength="10"></p>
             <p>     
                 <ul id="passwordRequirements" v-if="passwordFocused">
                     <li>Must be at least 8 characters long</li>
@@ -19,7 +20,7 @@
                 </ul>
                 <input type="password" placeholder="Password" id="password" v-model.trim="password" :class="{invalid:!validPassword, valid:validPassword}">
             </p>
-            <button id="submit" type="submit" :disabled="!validForm" :class="{disabled:!validForm}">Submit</button>
+            <button id="submit" @click="onSubmit" type="button" :disabled="!validForm" :class="{disabled:!validForm}">Submit</button>
         </div>
         </form>
     </div>
@@ -31,7 +32,9 @@ import {computed, ref, defineComponent} from 'vue';
 
 export default defineComponent({
   name: "signup-form",
+  components:{},
   setup(props, {emit}){
+    const phoneNumber = ref("");
     const email = ref("");
     const emailEntered = ref(false);
     const firstName = ref("");
@@ -70,7 +73,8 @@ export default defineComponent({
       passwordFocused,
       onSubmit,
       close,
-      emailEntered
+      emailEntered,
+      phoneNumber,
     }
   }
 });

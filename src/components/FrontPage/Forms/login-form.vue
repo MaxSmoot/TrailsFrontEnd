@@ -4,6 +4,7 @@
     <form @submit.prevent="onSubmit" class="form">
       <img class="x" src="../../../assets/x.svg" @click="close" />
       <h2>Login</h2>
+      <h3 v-if="error" class="error">Incorrect Email or Password</h3>
       <p>
         <input
           placeholder="Email"
@@ -40,10 +41,10 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   name: "login-form",
   setup(props, { emit }) {
+    const error = ref(false);
     const route = useRouter();
     const email = ref("");
     const password = ref("");
-    const loggedIn = useLogin();
     const validEmail = computed(() => validate("email", email.value));
     const validPassword = computed(() => password.value.length > 0);
     const validForm = computed(() => validPassword.value && validEmail.value);
@@ -51,9 +52,12 @@ export default defineComponent({
      * @todo implement fetch to server and user auth
      * for now it just sets the global state as if the user was logged in
      */
-    function onSubmit() {
-      loggedIn.value = true;
-      route.push({ name: "Home" });
+    async function onSubmit() {
+      if (await useLogin(email.value, password.value)) {
+        route.push("Home");
+      } else {
+        error.value = true;
+      }
     }
 
     function close() {
@@ -68,6 +72,7 @@ export default defineComponent({
       validForm,
       close,
       onSubmit,
+      error,
     };
   },
 });
