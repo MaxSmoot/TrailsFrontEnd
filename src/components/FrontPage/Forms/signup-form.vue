@@ -29,6 +29,7 @@
 <script>
 import { validate } from "../../Forms/HelperModules/validation";
 import {computed, ref, defineComponent} from 'vue';
+import useSignup from '../../../auth/useSignup';
 
 export default defineComponent({
   name: "signup-form",
@@ -51,8 +52,18 @@ export default defineComponent({
     /**
      * @todo implement form submission
      */
-    function onSubmit() {
-      alert("submit not implemented yet");
+    async function onSubmit() {
+      const data = {
+        email: email.value,
+        username: username.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+        phone: phoneNumber.value,
+        password: password.value
+      }
+      if(await !useSignup(data)) {
+        alert('error');
+      }
     }
 
     function close(){

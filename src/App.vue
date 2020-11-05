@@ -19,6 +19,8 @@ export default defineComponent({
     watch(user, () => {
       if (!user.token) {
         route.push('FrontPage');
+      } else {
+        route.push('Home');
       }
     })
   }

@@ -37,12 +37,10 @@
 import { validate } from "../../Forms/HelperModules/validation";
 import useLogin from "../../../auth/useLogin";
 import { defineComponent, ref, computed } from "vue";
-import { useRouter } from "vue-router";
 export default defineComponent({
   name: "login-form",
   setup(props, { emit }) {
     const error = ref(false);
-    const route = useRouter();
     const email = ref("");
     const password = ref("");
     const validEmail = computed(() => validate("email", email.value));
@@ -53,9 +51,8 @@ export default defineComponent({
      * for now it just sets the global state as if the user was logged in
      */
     async function onSubmit() {
-      if (await useLogin(email.value, password.value)) {
-        route.push("Home");
-      } else {
+      const loggedIn = await useLogin(email.value, password.value);
+      if (!loggedIn) {
         error.value = true;
       }
     }

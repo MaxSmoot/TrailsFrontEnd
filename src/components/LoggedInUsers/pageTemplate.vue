@@ -143,7 +143,7 @@ body {
   padding: 0;
   padding-top: 3rem;
   width: 100%;
-  height: 150%;
+  height: 100%;
 }
 
 @media screen and (max-width: 815px) {
