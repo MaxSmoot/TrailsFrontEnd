@@ -4,7 +4,8 @@
     <form @submit.prevent="onSubmit" class="form">
       <img class="x" src="../../../assets/x.svg" @click="close" />
       <h2>Login</h2>
-      <h3 v-if="error" class="error">Incorrect Email or Password</h3>
+      <h3 v-if="loggedIn == 500" class="error">Server Error</h3>
+      <h3 v-if="loggedIn == 401" class="error">Incorrect Email or Password</h3>
       <p>
         <input
           placeholder="Email"
@@ -40,7 +41,7 @@ import { defineComponent, ref, computed } from "vue";
 export default defineComponent({
   name: "login-form",
   setup(props, { emit }) {
-    const error = ref(false);
+    const loggedIn = ref();
     const email = ref("");
     const password = ref("");
     const validEmail = computed(() => validate("email", email.value));
@@ -51,10 +52,7 @@ export default defineComponent({
      * for now it just sets the global state as if the user was logged in
      */
     async function onSubmit() {
-      const loggedIn = await useLogin(email.value, password.value);
-      if (!loggedIn) {
-        error.value = true;
-      }
+      loggedIn.value = await useLogin(email.value, password.value);
     }
 
     function close() {
@@ -69,7 +67,7 @@ export default defineComponent({
       validForm,
       close,
       onSubmit,
-      error,
+      loggedIn,
     };
   },
 });

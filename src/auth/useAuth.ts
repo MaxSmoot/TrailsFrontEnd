@@ -13,3 +13,16 @@ const user = reactive({
 export default function useAuth() {
   return user;
 }
+
+export function clearUser() {
+  user.token = '';
+  user.firstName = '';
+  user.email = '';
+  user.phone = '';
+  user.username = '';
+  user.id = '';
+}
+
+// export function storeToken() {
+  
+// }
