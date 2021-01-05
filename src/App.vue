@@ -1,16 +1,20 @@
 <template>
   <div id="wrapper">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href='https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet'
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap"
+      rel="stylesheet"
     />
     <router-view />
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent, watch } from "vue";
-import useAuth from './auth/useAuth';
-import {useRouter} from 'vue-router';
+import useAuth from "./auth/useAuth";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
@@ -18,12 +22,12 @@ export default defineComponent({
     const route = useRouter();
     watch(user, () => {
       if (!user.token) {
-        route.push('FrontPage');
+        route.push("FrontPage");
       } else {
-        route.push('Home');
+        route.push("Home");
       }
-    })
-  }
+    });
+  },
 });
 </script>
 
@@ -39,7 +43,7 @@ body {
   font-family: "Roboto", sans-serif;
   background: transparent;
 }
-h1{
-  font-weight: normal;
+h1 {
+  font-weight: 400;
 }
 </style>

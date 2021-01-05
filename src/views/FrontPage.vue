@@ -64,9 +64,11 @@ export default {
   justify-content: center;
   align-items: center;
 }
+body{
+  font-family: 'Roboto', sans-serif;
+}
 h1 {
   margin-bottom: 0;
-  font-weight: normal;
 }
 #flex-container {
   @include flexCenter();
