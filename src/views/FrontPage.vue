@@ -2,7 +2,7 @@
   <div id="flex-container">
     <div class="left">
       <h1>Trails</h1>
-      <p>It's Twitter for the High Country</p>
+      <p>It's Twitter for the High Country test</p>
     </div>
     <div class="right">
       <button @click="toggleSignupForm" id="signupBtn">Sign Up</button>
