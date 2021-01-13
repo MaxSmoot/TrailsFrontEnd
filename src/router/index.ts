@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import useAuth from '../auth/useAuth';
-const auth = useAuth();
+import store from '../store'
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -39,9 +38,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name != "FrontPage" && !auth.token) {
+  if (to.name != "FrontPage" && !store.getters.isAuthenticated) {
     next({ name: "FrontPage" });
-  } else if (to.name == 'FrontPage' && auth.token){
+  } else if (to.name == 'FrontPage' && store.getters.isAuthenticated){
     next({name: 'Home'})
   } else{
     next();

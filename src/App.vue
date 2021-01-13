@@ -12,21 +12,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from "vue";
-import useAuth from "./auth/useAuth";
+import { defineComponent, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import store from "./store/index";
 
 export default defineComponent({
   setup() {
-    const user = useAuth();
-    const route = useRouter();
-    watch(user, () => {
-      if (!user.token) {
-        route.push("FrontPage");
-      } else {
-        route.push("Home");
-      }
+    onMounted(() => {
+      store.dispatch("getToken");
     });
+
+    const route = useRouter();
+
+    store.watch(
+      (state, getters) => getters.isAuthenticated,
+      (newValue, oldValue) => {
+        if (newValue) {
+          route.push("Home");
+        } else {
+          route.push("FrontPage");
+        }
+      }
+    );
   },
 });
 </script>

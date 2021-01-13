@@ -26,11 +26,11 @@
     </div>
 </template>
 
-<script>
+<script lang=ts>
 import { validate } from "../../Forms/HelperModules/validation";
 import {computed, ref, defineComponent} from 'vue';
-import useSignup from '../../../auth/useSignup';
-
+import store from '../../../store/index'
+import {registerParams} from "../../../types/index"
 export default defineComponent({
   name: "signup-form",
   components:{},
@@ -53,7 +53,7 @@ export default defineComponent({
      * @todo implement form submission
      */
     async function onSubmit() {
-      const data = {
+      const data: registerParams = {
         email: email.value,
         username: username.value,
         firstName: firstName.value,
@@ -61,9 +61,7 @@ export default defineComponent({
         phone: phoneNumber.value,
         password: password.value
       }
-      if(await !useSignup(data)) {
-        alert('error');
-      }
+      store.dispatch('register', data);
     }
 
     function close(){

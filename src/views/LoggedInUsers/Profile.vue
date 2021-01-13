@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import pageTemplate from "../../components/LoggedInUsers/pageTemplate.vue";
-import useAuth from "./../../auth/useAuth";
-import useLogout from "./../../auth/useLogout";
+// import useAuth from "./../../auth/useAuth";
+// import useLogout from "./../../auth/useLogout";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "Profile",
@@ -19,14 +19,14 @@ export default defineComponent({
     pageTemplate,
   },
   setup() {
-    const user = useAuth();
-    async function logout() {
-      console.log(await useLogout());
-    }
+    // const user = useAuth();
+    // async function logout() {
+    //   console.log(await useLogout());
+    // }
     return {
       pageTemplate,
-      user,
-      logout,
+      // user,
+      // logout,
     };
   },
 });

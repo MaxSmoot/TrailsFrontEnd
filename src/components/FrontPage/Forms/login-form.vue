@@ -34,10 +34,10 @@
     </form>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { validate } from "../../Forms/HelperModules/validation";
-import useLogin from "../../../auth/useLogin";
 import { defineComponent, ref, computed } from "vue";
+import store from "@/store";
 export default defineComponent({
   name: "login-form",
   setup(props, { emit }) {
@@ -52,7 +52,15 @@ export default defineComponent({
      * for now it just sets the global state as if the user was logged in
      */
     async function onSubmit() {
-      loggedIn.value = await useLogin(email.value, password.value);
+      try {
+        await store.dispatch("login", {
+          email: email.value,
+          password: password.value,
+        });
+      } catch (err) {
+        console.log(err)
+        loggedIn.value = err.status;
+      }
     }
 
     function close() {
