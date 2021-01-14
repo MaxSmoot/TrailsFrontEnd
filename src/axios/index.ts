@@ -5,8 +5,8 @@ const axiosInstance = axios.create({
 
   baseURL:
     process.env.NODE_ENV == "production"
-      ? process.env.PROD_API_URL
-      : process.env.DEV_API_URL,
+      ? process.env.API_URL
+      : process.env.DEV_URL,
 });
 
 export default axiosInstance;
