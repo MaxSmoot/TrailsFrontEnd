@@ -5,8 +5,8 @@ const axiosInstance = axios.create({
 
   baseURL:
     process.env.NODE_ENV == "production"
-      ? "https://www.trails.maxwsmoot.com/api"
-      : "http://localhost:3000/api",
+      ? process.env.PROD_API_URL
+      : process.env.DEV_API_URL,
 });
 
 export default axiosInstance;
