@@ -8,7 +8,11 @@ function register(params: registerParams) {
 function login(params: loginParams){
   return axios.post<tokenResponse>("/auth/login", params);
 }
+function logout(){
+  return axios.get<tokenResponse>("/auth/logout");
+}
 export default {
   register,
-  login
+  login,
+  logout
 };

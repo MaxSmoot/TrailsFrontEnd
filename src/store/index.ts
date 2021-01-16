@@ -51,6 +51,11 @@ export default createStore({
       commit("setToken", token);
       commit("setAuthStatus", true);
     },
+    async logout({ commit }) {
+      const response = await userService.logout();
+      commit("setToken", "");
+      commit("setAuthStatus", false);
+    },
   },
   modules: {},
 });
