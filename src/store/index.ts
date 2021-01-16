@@ -40,14 +40,10 @@ export default createStore({
       }
     },
     async register({ commit }, params: registerParams) {
-      try {
-        const response = await userService.register(params);
-        const token = response.data.token;
-        commit("setToken", token);
-        commit("setAuthStatus", true);
-      } catch (err) {
-        alert(err);
-      }
+      const response = await userService.register(params);
+      const token = response.data.token;
+      commit("setToken", token);
+      commit("setAuthStatus", true);
     },
     async login({ commit }, params: loginParams) {
       const response = await userService.login(params);

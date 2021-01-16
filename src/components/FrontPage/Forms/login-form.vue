@@ -12,7 +12,7 @@
           type="email"
           id="email"
           v-model.trim="email"
-          :class="{ invalid: !validEmail, valid: validEmail }"
+          class="formInput"
         />
       </p>
       <p>
@@ -21,9 +21,14 @@
           type="password"
           id="password"
           v-model.trim="password"
-          :class="{ invalid: !validPassword, valid: validPassword }"
+          class="formInput"
         />
       </p>
+      <p id="staySignedInWrapper">
+        Remember Me <input type="checkbox" name="staySignedIn"
+        class="staySignedIn" v-model="rememberMe"/>
+      </p>
+
       <button
         type="submit"
         :disabled="!validForm"
@@ -41,6 +46,7 @@ import store from "@/store";
 export default defineComponent({
   name: "login-form",
   setup(props, { emit }) {
+    const rememberMe = ref<boolean>(false);
     const loggedIn = ref();
     const email = ref("");
     const password = ref("");
@@ -56,9 +62,10 @@ export default defineComponent({
         await store.dispatch("login", {
           email: email.value,
           password: password.value,
+          rememberMe: rememberMe.value
         });
       } catch (err) {
-        console.log(err)
+        console.log(err);
         loggedIn.value = err.status;
       }
     }
@@ -76,6 +83,7 @@ export default defineComponent({
       close,
       onSubmit,
       loggedIn,
+      rememberMe
     };
   },
 });

@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 .form {
   display: block;
   background-color: white;
@@ -11,7 +11,7 @@
     list-style-type: none;
     margin-left: 5%;
   }
-  input {
+  .formInput {
     width: 80%;
     height: 2.5rem;
     display: block;
@@ -22,8 +22,19 @@
     outline: none;
     border-bottom: 0.09rem solid black;
   }
+  .staySignedIn {
+    margin-left: auto;
+    padding: 0;
+    margin-right: 0;
+  }
+  #staySignedInWrapper {
+    font-size: 1rem;
+    text-align: right;
+    margin: auto;
+    width: 80%;
+  }
   button {
-    border-radius: .4rem;
+    border-radius: 0.4rem;
     cursor: pointer;
     display: block;
     margin: auto;
