@@ -46,6 +46,7 @@ export default createStore({
       const token = response.data.token;
       commit("setToken", token);
       commit("setAuthStatus", true);
+      router.push("Home");
     },
     async login({ commit }, params: loginParams) {
       const response = await userService.login(params);
