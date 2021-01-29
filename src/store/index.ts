@@ -1,4 +1,5 @@
 import axios from "../axios/index";
+import router from "../router/index";
 import { createStore } from "vuex";
 import { registerParams, tokenResponse, loginParams } from "../types/index";
 import userService from "../auth/userService";
@@ -31,6 +32,7 @@ export default createStore({
         const token = response.data.token;
         commit("setToken", token);
         commit("setAuthStatus", true);
+        return true;
       } catch (err) {
         if (err.response) {
           console.error(err.response);
@@ -50,11 +52,13 @@ export default createStore({
       const token = response.data.token;
       commit("setToken", token);
       commit("setAuthStatus", true);
+      router.push("Home");
     },
     async logout({ commit }) {
-      const response = await userService.logout();
+      await userService.logout();
       commit("setToken", "");
       commit("setAuthStatus", false);
+      router.push("/");
     },
   },
   modules: {},

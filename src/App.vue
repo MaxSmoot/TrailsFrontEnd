@@ -18,6 +18,7 @@ import router from './router/index'
 
 export default defineComponent({
   setup() {
+    //Automatically Login in user who has valid refresh token
     onBeforeMount(async () => {
       await store.dispatch("getToken");
       if (store.getters.isAuthenticated){

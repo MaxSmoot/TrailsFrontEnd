@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import store from '../store'
+import store from "../store";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -36,13 +36,18 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
-router.beforeEach((to, from, next) => {
+/**
+ * Check if user is accessing any route that is protected and checks auth first
+ */
+router.beforeEach(async (to, __from, next) => {
   if (to.name != "FrontPage" && !store.getters.isAuthenticated) {
+    if (await store.dispatch("getToken")) {
+      next(to);
+    }
     next({ name: "FrontPage" });
-  } else if (to.name == 'FrontPage' && store.getters.isAuthenticated){
-    next({name: 'Home'})
-  } else{
+  } else if (to.name == "FrontPage" && store.getters.isAuthenticated) {
+    next("Home");
+  } else {
     next();
   }
 });
