@@ -12,28 +12,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { defineComponent, onBeforeMount } from "vue";
 import store from "./store/index";
+import router from './router/index'
 
 export default defineComponent({
   setup() {
-    onMounted(() => {
-      store.dispatch("getToken");
-    });
-
-    const route = useRouter();
-
-    store.watch(
-      (state, getters) => getters.isAuthenticated,
-      (newValue, oldValue) => {
-        if (newValue) {
-          route.push("Home");
-        } else {
-          route.push("FrontPage");
-        }
+    onBeforeMount(async () => {
+      await store.dispatch("getToken");
+      if (store.getters.isAuthenticated){
+        router.push("Home")
       }
-    );
+    });
   },
 });
 </script>
