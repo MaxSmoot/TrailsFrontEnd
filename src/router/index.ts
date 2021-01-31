@@ -43,8 +43,9 @@ router.beforeEach(async (to, __from, next) => {
   if (to.name != "FrontPage" && !store.getters.isAuthenticated) {
     if (await store.dispatch("getToken")) {
       next(to);
+    } else {
+      next({ name: "FrontPage" });
     }
-    next({ name: "FrontPage" });
   } else if (to.name == "FrontPage" && store.getters.isAuthenticated) {
     next("Home");
   } else {

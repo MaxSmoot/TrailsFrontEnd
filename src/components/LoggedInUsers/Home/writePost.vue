@@ -15,6 +15,7 @@
         >{{ CONTENT.length }}</label
       >
       <button
+        @click="createPost"
         :disabled="CONTENT.length == 0"
         :class="{ disabled: CONTENT.length == 0 }"
         type="submit"
@@ -27,12 +28,14 @@
 
 <script lang="ts">
 import { ref, watch, defineComponent } from "vue";
+import store from "@/store/index";
+import axios from "@/axios";
 export default defineComponent({
   props: {
     showX: Boolean,
   },
-  setup(props, { emit }) {
-    const MAX_LENGTH = 280;
+  setup(__props, { emit }) {
+    const MAX_LENGTH = 255;
     const CONTENT = ref("");
     const TEXT_AREA = ref();
     watch(CONTENT, () => {
@@ -48,18 +51,32 @@ export default defineComponent({
     function close() {
       emit("close");
     }
+
+    async function createPost() {
+      const response = await axios.post("/authenticated/post", {
+        postBody: CONTENT.value,
+      });
+      if (response.status == 201) {
+        CONTENT.value = "";
+        store.dispatch("getPosts");
+        close();
+      } else {
+        alert("error making post");
+      }
+    }
     return {
       TEXT_AREA,
       CONTENT,
       assertMaxLength,
       MAX_LENGTH,
       close,
+      createPost,
     };
   },
 });
 </script>
 <style lang="scss" scoped>
-@import './../../../styles/variables.scss';
+@import "./../../../styles/variables.scss";
 textarea {
   font-family: "Roboto", sans-serif;
   border: none;

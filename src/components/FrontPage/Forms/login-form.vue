@@ -45,7 +45,7 @@ import { defineComponent, ref, computed } from "vue";
 import store from "@/store";
 export default defineComponent({
   name: "login-form",
-  setup(props, { emit }) {
+  setup(__props, { emit }) {
     const rememberMe = ref<boolean>(false);
     const loggedIn = ref();
     const email = ref("");

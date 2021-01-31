@@ -1,8 +1,10 @@
 <template>
   <div>
     <ul>
-      <li v-for="post in posts" v-bind:key="post">
-        <p><b>John Smith</b></p>
+      <li v-for="post in loadedPosts" v-bind:key="post">
+        <p>
+          <b>{{ post.Username }}</b>
+        </p>
         {{ post.body }}
       </li>
     </ul>
@@ -10,16 +12,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import useLoadPosts from "./compositions/use-LoadPosts";
+import store from "@/store/index";
+import { computed, defineComponent, onBeforeMount } from "vue";
 export default defineComponent({
   setup() {
-    //load posts from the server
-    const { posts } = useLoadPosts();
+    const loadedPosts = computed(() => store.getters.posts);
+    onBeforeMount(async () => {
+      store.dispatch("getPosts");
+    });
 
-    return {
-      posts,
-    };
+    return { loadedPosts };
   },
 });
 </script>
