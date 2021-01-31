@@ -25,7 +25,7 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
+<style scoped lang="scss">
 ul {
   list-style: none;
   width: 100%;
@@ -33,12 +33,14 @@ ul {
   padding: 0;
 }
 li {
+  margin: 0;
   padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  overflow-wrap: break-word;
 }
 li:hover {
   background-color: rgba(0, 0, 0, 0.021);

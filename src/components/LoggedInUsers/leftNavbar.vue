@@ -72,7 +72,6 @@ export default defineComponent({
 #leftNavbarWrapper {
   display: inline-block;
   height: 100vh;
-  overflow-y: scroll;
   scrollbar-width: none;
 }
 #leftNavbarWrapper::-webkit-scrollbar {

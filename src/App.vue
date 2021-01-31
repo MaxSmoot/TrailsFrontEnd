@@ -22,7 +22,9 @@ export default defineComponent({
     onBeforeMount(async () => {
       await store.dispatch("getToken");
       if (store.getters.isAuthenticated){
-        router.push("Home")
+        //fetch user info if successful login
+        store.dispatch("getUserInfo")
+        router.push("home")
       }
     });
   },
@@ -35,7 +37,7 @@ html {
 }
 body {
   position: absolute;
-  overflow-x: hidden;
+  width:100%;
   padding: 0;
   margin: 0;
   font-family: "Roboto", sans-serif;

@@ -1,5 +1,7 @@
 <template>
-  <pageTemplate></pageTemplate>
+  <pageTemplate>
+    <input type="search" name="searchTrails" id="searchTrails" placeholder="Search Trails">
+  </pageTemplate>
 </template>
 
 <script lang="ts">
