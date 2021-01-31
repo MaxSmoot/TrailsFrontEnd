@@ -32,10 +32,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-html {
-  min-height: 100%;
-}
 body {
+  min-height: 100%;
+  overflow: hidden;
   position: absolute;
   width:100%;
   padding: 0;
