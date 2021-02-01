@@ -3,7 +3,7 @@
         <form @submit.prevent class="form">
             <img class="x" src='../../../assets/x.svg' @click="close">
          <h2>Sign Up</h2>
-         <p v-if="error" class="error">{{errorMessage}}</p>
+         <pre v-if="error" class="error">{{errorMessage}}</pre>
          <p><input type="email" placeholder="Email" id="emailbox" v-model.trim="email"  class="formInput" :class="{invalid:!validEmail, valid:validEmail}"></p>
          <button type="button" v-on:click="emailEntered = true" :disabled="!validEmail" :class="{disabled:!validEmail}" v-if="!emailEntered">Sign Up</button>
          <div id="fullForm" v-if="emailEntered">
