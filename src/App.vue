@@ -33,9 +33,8 @@ export default defineComponent({
 
 <style lang="scss">
 body {
-  min-height: 100%;
-  overflow: hidden;
   position: absolute;
+  overflow: hidden;
   width:100%;
   padding: 0;
   margin: 0;

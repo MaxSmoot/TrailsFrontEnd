@@ -64,8 +64,8 @@ export default {
   justify-content: center;
   align-items: center;
 }
-body{
-  font-family: 'Roboto', sans-serif;
+body {
+  font-family: "Roboto", sans-serif;
 }
 h1 {
   margin-bottom: 0;
