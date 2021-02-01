@@ -5,14 +5,14 @@
       <p>It's Twitter for the High Country</p>
     </div>
     <div class="right">
-      <button @click="toggleSignupForm" id="signupBtn">Sign Up</button>
-      <button id="loginBtn" @click="toggleLoginForm">Log In</button>
+      <button @click="signUpFormShow = !signUpFormShow" id="signupBtn">Sign Up</button>
+      <button id="loginBtn" @click="loginFormShow = !loginFormShow">Log In</button>
     </div>
-    <div v-if="signUpFormShown" class="popUpForm">
-      <signupForm @close="toggleSignupForm" />
+    <div v-if="signUpFormShow" class="popUpForm">
+      <signupForm @close="signUpFormShow = !signUpFormShow" />
     </div>
     <div v-if="loginFormShow" class="popUpForm">
-      <loginForm @close="toggleLoginForm" />
+      <loginForm @close="loginFormShow = !loginFormShow" />
     </div>
   </div>
 </template>
@@ -28,28 +28,11 @@ export default {
     loginForm,
   },
   setup() {
-    const signUpFormShown = ref(false);
+    const signUpFormShow = ref(false);
     const loginFormShow = ref(false);
 
-    function toggleLoginForm() {
-      if (loginFormShow.value) {
-        loginFormShow.value = false;
-      } else {
-        loginFormShow.value = true;
-      }
-    }
-
-    function toggleSignupForm() {
-      if (signUpFormShown.value) {
-        signUpFormShown.value = false;
-      } else {
-        signUpFormShown.value = true;
-      }
-    }
     return {
-      toggleSignupForm,
-      signUpFormShown,
-      toggleLoginForm,
+      signUpFormShow,
       loginFormShow,
     };
   },

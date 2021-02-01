@@ -2,13 +2,13 @@
   <div id="homeWrapper">
     <div id="newPostPopUp" v-if="showNewPost">
       <div id="writePost">
-        <writePost @close="toggleNewPost" :showX="true" />
+        <writePost @close="showNewPost = !showNewPost" :showX="true" />
       </div>
     </div>
-    <div id="left" v-if="true">
-      <leftNavbar v-if="true" @show-post="toggleNewPost" />
+    <div id="left">
+      <leftNavbar @show-post="showNewPost = !showNewPost" />
     </div>
-    <div id="center" v-if="true">
+    <div id="center">
       <div id="currentPage">
         <h1>{{ currentPage.name }}</h1>
       </div>
@@ -35,15 +35,8 @@ export default defineComponent({
     const showNewPost = ref(false);
     //get the current page name to display at the top of the screen
     const currentPage = useRoute();
-    /**
-     * toggle the visibility of the new post popup via the showNewPost variable
-     */
-    function toggleNewPost() {
-      if (showNewPost.value) showNewPost.value = false;
-      else showNewPost.value = true;
-    }
+
     return {
-      toggleNewPost,
       showNewPost,
       currentPage,
     };
@@ -115,7 +108,7 @@ export default defineComponent({
 
 #currentPage {
   position: sticky;
-  top:0;
+  top: 0;
   display: block;
   background-color: white;
   z-index: 1;
