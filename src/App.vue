@@ -14,17 +14,22 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount } from "vue";
 import store from "./store/index";
-import router from './router/index'
+import router from "./router/index";
 
 export default defineComponent({
   setup() {
     //Automatically Login in user who has valid refresh token
     onBeforeMount(async () => {
       await store.dispatch("getToken");
-      if (store.getters.isAuthenticated){
+      if (store.getters.isAuthenticated) {
         //fetch user info if successful login
-        store.dispatch("getUserInfo")
-        router.push("home")
+        store.dispatch("getUserInfo");
+        router.push("home");
+      }
+    });
+    store.subscribe((mutation, state) => {
+      if(mutation.type === "setAuthStatus" && !state.authStatus){
+        router.push("/");
       }
     });
   },
@@ -35,7 +40,7 @@ export default defineComponent({
 body {
   position: absolute;
   overflow: hidden;
-  width:100%;
+  width: 100%;
   padding: 0;
   margin: 0;
   font-family: "Roboto", sans-serif;

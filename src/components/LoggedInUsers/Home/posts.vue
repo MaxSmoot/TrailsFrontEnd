@@ -17,8 +17,15 @@ import { computed, defineComponent, onBeforeMount } from "vue";
 export default defineComponent({
   setup() {
     const loadedPosts = computed(() => store.getters.posts);
+    /**
+     * @todo implement error popup 
+     */
     onBeforeMount(async () => {
-      store.dispatch("getPosts");
+      try {
+        await store.dispatch("getPosts");
+      } catch (e) {
+        alert(e.message)
+      }
     });
 
     return { loadedPosts };

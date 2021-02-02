@@ -35,7 +35,7 @@ export default defineComponent({
     showX: Boolean,
   },
   setup(__props, { emit }) {
-    const MAX_LENGTH = 255;
+    const MAX_LENGTH = 256;
     const CONTENT = ref("");
     const TEXT_AREA = ref();
     watch(CONTENT, () => {
@@ -51,14 +51,19 @@ export default defineComponent({
     function close() {
       emit("close");
     }
-
+  /**
+   * @todo implement clean error pop up for non authorization errors
+   */
     async function createPost() {
-      await axios.post("/authenticated/post", {
+      try{await axios.post("/authenticated/post", {
         postBody: CONTENT.value,
       });
       CONTENT.value = "";
       store.dispatch("getPosts");
       close();
+      } catch(e){
+        alert(e.message);
+      }
     }
     return {
       TEXT_AREA,

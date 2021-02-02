@@ -55,10 +55,9 @@ export default createStore({
         const token = response.data.token;
         commit("setToken", token);
         commit("setAuthStatus", true);
-        Promise.resolve();
+        return Promise.resolve();
       } catch (err) {
         commit("setAuthStatus", false);
-        router.push("/");
       }
     },
     async register({ commit }, params: registerParams) {
