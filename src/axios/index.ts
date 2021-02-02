@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import store from "../store/index";
 
 const axiosInstance = axios.create({
@@ -21,15 +21,16 @@ export default axiosInstance;
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
-    if (
-      originalRequest.url != "/auth/token" &&
-      error.response.status === 401 &&
-      !JSON.parse(originalRequest.data)._retry
-    ) {
-      await store.dispatch("getToken");
+    const originalRequest: AxiosRequestConfig = error.config;
+    if (!originalRequest.data) {
+      originalRequest.data = { _retry: false };
+    } else {
       originalRequest.data = JSON.parse(originalRequest.data);
+    }
+    if (originalRequest.url != "/auth/token" && error.response.status === 401 && !originalRequest.data._retry) {
       originalRequest.data._retry = true;
+      await store.dispatch("getToken");
+
       return axiosInstance.request(originalRequest);
     }
     return Promise.reject({

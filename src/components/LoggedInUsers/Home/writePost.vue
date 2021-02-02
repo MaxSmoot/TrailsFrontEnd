@@ -53,16 +53,12 @@ export default defineComponent({
     }
 
     async function createPost() {
-      try {
-        await axios.post("/authenticated/post", {
-          postBody: CONTENT.value,
-        });
-        CONTENT.value = "";
-        store.dispatch("getPosts");
-        close();
-      } catch (err) {
-        console.log("You have been logged out");
-      }
+      await axios.post("/authenticated/post", {
+        postBody: CONTENT.value,
+      });
+      CONTENT.value = "";
+      store.dispatch("getPosts");
+      close();
     }
     return {
       TEXT_AREA,
