@@ -53,15 +53,15 @@ export default defineComponent({
     }
 
     async function createPost() {
-      const response = await axios.post("/authenticated/post", {
-        postBody: CONTENT.value,
-      });
-      if (response.status == 201) {
+      try {
+        await axios.post("/authenticated/post", {
+          postBody: CONTENT.value,
+        });
         CONTENT.value = "";
         store.dispatch("getPosts");
         close();
-      } else {
-        alert("error making post");
+      } catch (err) {
+        console.log("You have been logged out");
       }
     }
     return {
