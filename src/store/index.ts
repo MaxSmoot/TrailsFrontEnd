@@ -55,9 +55,10 @@ export default createStore({
         const token = response.data.token;
         commit("setToken", token);
         commit("setAuthStatus", true);
-        return Promise.resolve();
+        return true;
       } catch (err) {
         commit("setAuthStatus", false);
+        return false;
       }
     },
     async register({ commit }, params: registerParams) {

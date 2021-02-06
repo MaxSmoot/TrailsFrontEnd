@@ -41,7 +41,8 @@ const router = createRouter({
  */
 router.beforeEach(async (to, __from, next) => {
   if (to.name != "FrontPage" && !store.getters.isAuthenticated) {
-    if (await store.dispatch("getToken")) {
+    const gotToken = await store.dispatch("getToken");
+    if (gotToken) {
       next(to);
     } else {
       next({ name: "FrontPage" });
