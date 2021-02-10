@@ -35,7 +35,7 @@ export default defineComponent({
     showX: Boolean,
   },
   setup(__props, { emit }) {
-    const MAX_LENGTH = 256;
+    const MAX_LENGTH = 255;
     const CONTENT = ref("");
     const TEXT_AREA = ref();
     watch(CONTENT, () => {
