@@ -1,5 +1,6 @@
 # trails
 Front End for a Social Media Application for CS3490 Team Project, currently a personal project.
+https://trails.maxwsmoot.com
 ## Project setup
 ```
 npm install
