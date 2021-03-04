@@ -5,14 +5,15 @@
       <p>It's Twitter for the High Country</p>
     </div>
     <div class="right">
-      <button @click="signUpFormShow = !signUpFormShow" id="signupBtn">Sign Up</button>
-      <button id="loginBtn" @click="loginFormShow = !loginFormShow">Log In</button>
+      <button @click="signUpFormShow = !signUpFormShow" id="signupBtn">
+        Sign Up
+      </button>
+      <button id="loginBtn" @click="loginFormShow = !loginFormShow">
+        Log In
+      </button>
     </div>
-    <div v-if="signUpFormShow" class="popUpForm">
-      <signupForm @close="signUpFormShow = !signUpFormShow" />
-    </div>
-    <div v-if="loginFormShow" class="popUpForm">
-      <loginForm @close="loginFormShow = !loginFormShow" />
+    <div class="popUpForm" v-show="loginFormShow || signUpFormShow">
+      <keep-alive><component :is="signUpFormShow ? signupForm : loginForm" @close="loginFormShow ? loginFormShow = false : signUpFormShow = false"></component></keep-alive>
     </div>
   </div>
 </template>
@@ -34,6 +35,8 @@ export default {
     return {
       signUpFormShow,
       loginFormShow,
+      signupForm,
+      loginForm,
     };
   },
 };
