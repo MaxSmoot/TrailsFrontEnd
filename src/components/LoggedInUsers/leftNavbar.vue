@@ -2,40 +2,54 @@
   <div id="leftNavbarWrapper">
     <ul>
       <li :class="{ currentPage: route.name == 'Home' }">
-        <router-link to="/home"
-          ><span class="icon-home"></span
-          ><b class="navWord">Home</b></router-link
+        <router-link
+          to="/home"
         >
+          <span class="icon-home" /><b class="navWord">Home</b>
+        </router-link>
       </li>
       <li :class="{ currentPage: route.name == 'Explore' }">
-        <router-link to="/explore"
-          ><span class="icon-explore"></span
-          ><b class="navWord">Explore</b></router-link
+        <router-link
+          to="/explore"
         >
+          <span class="icon-explore" /><b class="navWord">Explore</b>
+        </router-link>
       </li>
       <li :class="{ currentPage: route.name == 'Circles' }">
-        <router-link to="/circles"
-          ><span class="icon-circles"></span
-          ><b class="navWord">Circles</b></router-link
+        <router-link
+          to="/circles"
         >
+          <span class="icon-circles" /><b class="navWord">Circles</b>
+        </router-link>
       </li>
       <li :class="{ currentPage: route.name == 'Pages' }">
-        <router-link to="/pages"
-          ><span class="icon-pages"></span
-          ><b class="navWord">Pages</b></router-link
+        <router-link
+          to="/pages"
         >
+          <span class="icon-pages" /><b class="navWord">Pages</b>
+        </router-link>
       </li>
       <li :class="{ currentPage: route.name == 'Profile' }">
-        <router-link to="/profile"
-          ><span class="icon-profile"></span
-          ><b class="navWord">Profile</b></router-link
+        <router-link
+          to="/profile"
         >
+          <span class="icon-profile" /><b class="navWord">Profile</b>
+        </router-link>
       </li>
       <li class="postSVG">
-        <span id="writePostIcon" class="icon-pen" @click="showPost"></span>
+        <span
+          id="writePostIcon"
+          class="icon-pen"
+          @click="showPost"
+        />
       </li>
       <li>
-        <button class="navWord" id="holler" type="button" @click="showPost">
+        <button
+          class="navWord"
+          id="holler"
+          type="button"
+          @click="showPost"
+        >
           Holler'
         </button>
       </li>
@@ -47,9 +61,9 @@
 import { useRoute } from "vue-router";
 import { defineComponent } from "vue";
 export default defineComponent({
-  name: "leftNavbar",
-
-  setup(props, { emit }) {
+  name: "LeftNavbar",
+  emits: ['show-post'],
+  setup(_props, { emit }) {
     const route = useRoute();
 
     /**
@@ -140,7 +154,7 @@ li {
     display: none;
   }
 }
-#writePostIcon{
+#writePostIcon {
   color: $primary_color;
 }
 </style>

@@ -16,14 +16,14 @@ export interface tokenResponse {
   token: string;
 }
 export interface userData{
-  Username: string,
-  Phone: string,
-  FName: string,
-  LName: string,
-  Email: string
+  Username: string;
+  Phone: string;
+  FName: string;
+  LName: string;
+  Email: string;
 }
 export interface posts{
-  Username: string,
-  body: string,
-  timestamp: string
+  Username: string;
+  body: string;
+  timestamp: string;
 }

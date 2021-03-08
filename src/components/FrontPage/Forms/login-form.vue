@@ -1,11 +1,28 @@
 <template>
   <div id="wrapper">
     <!-- Using the shared forms.css -->
-    <form @submit.prevent="onSubmit" class="form">
-      <img class="x" src="../../../assets/x.svg" @click="close" />
+    <form
+      @submit.prevent="onSubmit"
+      class="form"
+    >
+      <img
+        class="x"
+        src="../../../assets/x.svg"
+        @click="close"
+      >
       <h2>Login</h2>
-      <h3 v-if="loggedIn == 500" class="error">Server Error</h3>
-      <h3 v-if="loggedIn == 401" class="error">Incorrect Email or Password</h3>
+      <h3
+        v-if="loggedIn == 500"
+        class="error"
+      >
+        Server Error
+      </h3>
+      <h3
+        v-if="loggedIn == 401"
+        class="error"
+      >
+        Incorrect Email or Password
+      </h3>
       <p>
         <input
           placeholder="Email"
@@ -13,7 +30,7 @@
           id="email"
           v-model.trim="email"
           class="formInput"
-        />
+        >
       </p>
       <p>
         <input
@@ -22,11 +39,15 @@
           id="password"
           v-model.trim="password"
           class="formInput"
-        />
+        >
       </p>
       <p id="staySignedInWrapper">
-        Remember Me <input type="checkbox" name="staySignedIn"
-        class="staySignedIn" v-model="rememberMe"/>
+        Remember Me <input
+          type="checkbox"
+          name="staySignedIn"
+          class="staySignedIn"
+          v-model="rememberMe"
+        >
       </p>
 
       <button
@@ -44,7 +65,8 @@ import { validate } from "../../Forms/HelperModules/validation";
 import { defineComponent, ref, computed } from "vue";
 import store from "@/store";
 export default defineComponent({
-  name: "login-form",
+  name: "LoginForm",
+  emits: ['close'],
   setup(__props, { emit }) {
     const rememberMe = ref<boolean>(false);
     const loggedIn = ref();

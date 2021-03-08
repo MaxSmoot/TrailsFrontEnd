@@ -1,8 +1,14 @@
 <template>
   <div id="homeWrapper">
-    <div id="newPostPopUp" v-if="showNewPost">
+    <div
+      id="newPostPopUp"
+      v-if="showNewPost"
+    >
       <div id="writePost">
-        <writePost @close="showNewPost = !showNewPost" :showX="true" />
+        <writePost
+          @close="showNewPost = !showNewPost"
+          :show-x="true"
+        />
       </div>
     </div>
     <div id="left">
@@ -16,7 +22,7 @@
         <slot />
       </div>
     </div>
-    <div id="right"></div>
+    <div id="right" />
   </div>
 </template>
 <script lang="ts">
@@ -25,7 +31,7 @@ import leftNavbar from "./leftNavbar.vue";
 import { ref, defineComponent } from "vue";
 import { useRoute } from "vue-router";
 export default defineComponent({
-  name: "pageTemplate",
+  name: "PageTemplate",
   components: {
     writePost,
     leftNavbar,

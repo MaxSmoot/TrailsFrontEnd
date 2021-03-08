@@ -1,8 +1,14 @@
 <template>
   <pageTemplate>
-    <p id="name">{{userInfo.FName}} {{userInfo.LName}}</p>
-    <p id="userName">@{{userInfo.Username}}</p>
-    <button @click="logout">Logout</button>
+    <p id="name">
+      {{ userInfo.FName }} {{ userInfo.LName }}
+    </p>
+    <p id="userName">
+      @{{ userInfo.Username }}
+    </p>
+    <button @click="logout">
+      Logout
+    </button>
   </pageTemplate>
 </template>
 

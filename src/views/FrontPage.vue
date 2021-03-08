@@ -5,15 +5,29 @@
       <p>It's Twitter for the High Country</p>
     </div>
     <div class="right">
-      <button @click="signUpFormShow = !signUpFormShow" id="signupBtn">
+      <button
+        @click="signUpFormShow = !signUpFormShow"
+        id="signupBtn"
+      >
         Sign Up
       </button>
-      <button id="loginBtn" @click="loginFormShow = !loginFormShow">
+      <button
+        id="loginBtn"
+        @click="loginFormShow = !loginFormShow"
+      >
         Log In
       </button>
     </div>
-    <div class="popUpForm" v-show="loginFormShow || signUpFormShow">
-      <keep-alive><component :is="signUpFormShow ? signupForm : loginForm" @close="loginFormShow ? loginFormShow = false : signUpFormShow = false"></component></keep-alive>
+    <div
+      class="popUpForm"
+      v-show="loginFormShow || signUpFormShow"
+    >
+      <keep-alive>
+        <component
+          :is="signUpFormShow ? signupForm : loginForm"
+          @close="loginFormShow ? loginFormShow = false : signUpFormShow = false"
+        />
+      </keep-alive>
     </div>
   </div>
 </template>

@@ -1,6 +1,11 @@
 <template>
   <pageTemplate>
-    <input type="search" name="searchTrails" id="searchTrails" placeholder="Search Trails">
+    <input
+      type="search"
+      name="searchTrails"
+      id="searchTrails"
+      placeholder="Search Trails"
+    >
   </pageTemplate>
 </template>
 

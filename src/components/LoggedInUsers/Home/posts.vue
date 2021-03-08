@@ -1,7 +1,10 @@
 <template>
   <div>
     <ul>
-      <li v-for="post in loadedPosts" v-bind:key="post">
+      <li
+        v-for="post in loadedPosts"
+        :key="post"
+      >
         <p>
           <b>{{ post.Username }}</b>
         </p>

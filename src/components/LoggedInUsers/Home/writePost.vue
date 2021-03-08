@@ -1,13 +1,13 @@
 <template>
   <div id="wrapper">
     <form id="form" @submit.prevent="">
-      <img v-if="showX" class="x" @click="close" src="../../../assets/x.svg" />
+      <img v-if="showX" class="x" src="../../../assets/x.svg" @click="close" />
       <textarea
         ref="TEXT_AREA"
         v-model="CONTENT"
-        @input="assertMaxLength"
         placeholder="What's on your mind?"
-      ></textarea>
+        @input="assertMaxLength"
+      />
       <label
         id="count"
         :class="{ red: CONTENT.length == MAX_LENGTH }"
@@ -15,10 +15,10 @@
         >{{ CONTENT.length }}</label
       >
       <button
-        @click="createPost"
         :disabled="CONTENT.length == 0"
         :class="{ disabled: CONTENT.length == 0 }"
         type="submit"
+        @click="createPost"
       >
         Holler'
       </button>
@@ -27,20 +27,21 @@
 </template>
 
 <script lang="ts">
-import { ref, watch, defineComponent } from "vue";
-import store from "@/store/index";
-import axios from "@/axios";
+import { ref, watch, defineComponent } from 'vue';
+import store from '@/store/index';
+import axios from '@/axios';
 export default defineComponent({
   props: {
-    showX: Boolean,
+    showX: Boolean
   },
+  emits: ['close'],
   setup(__props, { emit }) {
     const MAX_LENGTH = 255;
-    const CONTENT = ref("");
+    const CONTENT = ref('');
     const TEXT_AREA = ref();
     watch(CONTENT, () => {
-      TEXT_AREA.value.style.height = "auto";
-      TEXT_AREA.value.style.height = TEXT_AREA.value.scrollHeight + "px";
+      TEXT_AREA.value.style.height = 'auto';
+      TEXT_AREA.value.style.height = TEXT_AREA.value.scrollHeight + 'px';
     });
     function assertMaxLength() {
       if (CONTENT.value.length >= MAX_LENGTH) {
@@ -49,19 +50,20 @@ export default defineComponent({
     }
 
     function close() {
-      emit("close");
+      emit('close');
     }
-  /**
-   * @todo implement clean error pop up for non authorization errors
-   */
+    /**
+     * @todo implement clean error pop up for non authorization errors
+     */
     async function createPost() {
-      try{await axios.post("/authenticated/post", {
-        postBody: CONTENT.value,
-      });
-      CONTENT.value = "";
-      store.dispatch("getPosts");
-      close();
-      } catch(e){
+      try {
+        await axios.post('/authenticated/post', {
+          postBody: CONTENT.value
+        });
+        CONTENT.value = '';
+        store.dispatch('getPosts');
+        close();
+      } catch (e) {
         alert(e.message);
       }
     }
@@ -71,15 +73,15 @@ export default defineComponent({
       assertMaxLength,
       MAX_LENGTH,
       close,
-      createPost,
+      createPost
     };
-  },
+  }
 });
 </script>
 <style lang="scss" scoped>
-@import "./../../../styles/variables.scss";
+@import './../../../styles/variables.scss';
 textarea {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   border: none;
   outline: none;
   display: block;
