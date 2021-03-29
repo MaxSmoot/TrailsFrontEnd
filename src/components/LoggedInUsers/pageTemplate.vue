@@ -1,14 +1,8 @@
 <template>
   <div id="homeWrapper">
-    <div
-      id="newPostPopUp"
-      v-if="showNewPost"
-    >
+    <div id="newPostPopUp" v-if="showNewPost">
       <div id="writePost">
-        <writePost
-          @close="showNewPost = !showNewPost"
-          :show-x="true"
-        />
+        <writePost @close="showNewPost = !showNewPost" :show-x="true" />
       </div>
     </div>
     <div id="left">
@@ -26,15 +20,15 @@
   </div>
 </template>
 <script lang="ts">
-import writePost from "./Home/writePost.vue";
-import leftNavbar from "./leftNavbar.vue";
-import { ref, defineComponent } from "vue";
-import { useRoute } from "vue-router";
+import writePost from './Home/writePost.vue';
+import leftNavbar from './leftNavbar.vue';
+import { ref, defineComponent } from 'vue';
+import { useRoute } from 'vue-router';
 export default defineComponent({
-  name: "PageTemplate",
+  name: 'PageTemplate',
   components: {
     writePost,
-    leftNavbar,
+    leftNavbar
   },
   setup() {
     //keep track of when to show the popup new post form
@@ -44,9 +38,9 @@ export default defineComponent({
 
     return {
       showNewPost,
-      currentPage,
+      currentPage
     };
-  },
+  }
 });
 </script>
 <style scoped>
@@ -54,13 +48,8 @@ export default defineComponent({
   box-sizing: border-box;
 }
 #homeWrapper {
-  display: flex;
+  display: grid;
   overflow: auto;
-  flex-direction: row;
-  width: 100%;
-  min-height: 100%;
-  align-items: stretch;
-  flex-grow: 1;
 }
 
 #exit {
@@ -131,36 +120,16 @@ export default defineComponent({
 }
 
 @media screen and (max-width: 815px) {
-  #right {
-    display: none;
-  }
-  #center {
-    width: calc(100vw - 3rem);
-    margin-left: auto;
-  }
-  #currentPage {
-    width: calc(100vw - 3rem);
-    margin-left: auto;
-  }
-  #left {
-    width: 3rem;
-  }
-  #writePost {
-    width: 95%;
+  #homeWrapper {
+    grid-template-columns: 12% 88%;
   }
 }
 @media screen and (min-width: 815px) {
-  #right {
-    min-width: 30%;
-  }
-  #center {
-    width: 40%;
-  }
   #writePost {
     width: 50%;
   }
-  #left {
-    min-width: 30%;
+  #homeWrapper {
+    grid-template-columns: 30% 40% 30%;
   }
 }
 </style>

@@ -1,31 +1,24 @@
 <template>
-  <div id="flex-container">
+  <div id="grid-container">
     <div class="left">
       <h1>Trails</h1>
       <p>It's Twitter for the High Country</p>
     </div>
     <div class="right">
-      <button
-        @click="signUpFormShow = !signUpFormShow"
-        id="signupBtn"
-      >
+      <button id="signupBtn" @click="signUpFormShow = !signUpFormShow">
         Sign Up
       </button>
-      <button
-        id="loginBtn"
-        @click="loginFormShow = !loginFormShow"
-      >
+      <button id="loginBtn" @click="loginFormShow = !loginFormShow">
         Log In
       </button>
     </div>
-    <div
-      class="popUpForm"
-      v-show="loginFormShow || signUpFormShow"
-    >
+    <div v-show="loginFormShow || signUpFormShow" class="popUpForm">
       <keep-alive>
         <component
           :is="signUpFormShow ? signupForm : loginForm"
-          @close="loginFormShow ? loginFormShow = false : signUpFormShow = false"
+          @close="
+            loginFormShow ? (loginFormShow = false) : (signUpFormShow = false)
+          "
         />
       </keep-alive>
     </div>
@@ -33,14 +26,14 @@
 </template>
 
 <script lang="ts">
-import signupForm from "./../components/FrontPage/Forms/signup-form.vue";
-import loginForm from "./../components/FrontPage/Forms/login-form.vue";
-import { ref } from "vue";
+import signupForm from './../components/FrontPage/Forms/signup-form.vue';
+import loginForm from './../components/FrontPage/Forms/login-form.vue';
+import { ref } from 'vue';
 export default {
-  name: "Signup",
+  name: 'Signup',
   components: {
     signupForm,
-    loginForm,
+    loginForm
   },
   setup() {
     const signUpFormShow = ref(false);
@@ -50,14 +43,14 @@ export default {
       signUpFormShow,
       loginFormShow,
       signupForm,
-      loginForm,
+      loginForm
     };
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/variables.scss";
+@import '../styles/variables.scss';
 @mixin flexCenter() {
   display: flex;
   flex-direction: column;
@@ -65,24 +58,18 @@ export default {
   align-items: center;
 }
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 h1 {
   margin-bottom: 0;
 }
-#flex-container {
-  @include flexCenter();
-  width: 100vw;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  min-height: 100vh;
-  position: absolute;
-  z-index: -2;
+#grid-container {
+  display: grid;
 }
 @media screen and (max-width: 815px) {
-  #flex-container {
+  #grid-container {
     background: linear-gradient(180deg, $primary_color 50%, #ffffff 50%);
-    flex-direction: column;
+    grid-template-rows: 50% 50%;
   }
   .left {
     height: 50vh;
@@ -94,16 +81,15 @@ h1 {
   }
 }
 @media screen and (min-width: 815px) {
-  #flex-container {
+  #grid-container {
+    grid-template-columns: 50% 50%;
     background: linear-gradient(90deg, $primary_color 50%, #ffffff 50%);
   }
   .left {
     height: 100vh;
-    width: 50vw;
   }
   .right {
     height: 100vh;
-    width: 50vw;
   }
 }
 .popUpForm {
@@ -121,13 +107,11 @@ h1 {
   color: #000000;
   font-size: 2rem;
   position: relative;
-  z-index: -1;
-  background: url("./../assets/mountains.png") no-repeat center bottom;
+  background: url('./../assets/mountains.png') no-repeat center bottom;
 }
 .right {
   @include flexCenter();
   position: relative;
-  z-index: -1;
 }
 button {
   cursor: pointer;
