@@ -1,5 +1,7 @@
-# trails
+# Trails
 Front End for a Social Media Application for CS3490 Team Project, currently a personal project.
+
+Trails is a social media application much like twitter. The front end is built in Vue js and is features responsive design for pleasing mobile and desktop experience. Currently a work in progress.
 https://trails.maxwsmoot.com
 ## Project setup
 ```
