@@ -4,7 +4,7 @@ import { RegisterParams } from '../types/index';
 
 function deleteSecondaryRefreshToken() {
   document.cookie =
-    'secondaryRefreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    'secondaryRefreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; Path=/;';
 }
 
 function register(params: RegisterParams) {
