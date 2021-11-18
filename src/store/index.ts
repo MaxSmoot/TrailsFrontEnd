@@ -76,8 +76,8 @@ export default createStore({
       router.push("Home");
     },
     async logout({ commit }) {
-      await userService.logout().catch(()=>userService.deleteSecondaryRefreshToken());
       userService.deleteSecondaryRefreshToken();
+      await userService.logout().catch(()=>console.log("failed"));
       commit("setToken", "");
       commit("setAuthStatus", false);
       router.push("/");
