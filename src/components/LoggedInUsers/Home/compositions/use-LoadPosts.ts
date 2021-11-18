@@ -1,7 +1,7 @@
 import axios from "@/axios/index"
 // eslint-disable-next-line
-import { posts } from "@/types";
+import { Posts } from "@/types";
 export default async function useLoadPosts() {
-  const posts = await axios.get<Array<posts>>("/authenticated/post");
+  const posts = await axios.get<Array<Posts>>("/authenticated/post");
   return posts;
 }

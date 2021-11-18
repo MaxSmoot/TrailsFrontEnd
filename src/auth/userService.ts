@@ -1,22 +1,31 @@
-import axios from "../axios/index";
-import { loginParams, tokenResponse, userData } from "../types/index";
-import { registerParams } from "../types/index";
+import axios from '../axios/index';
+import { LoginParams, TokenResponse, UserData } from '../types/index';
+import { RegisterParams } from '../types/index';
 
-function register(params: registerParams) {
-  return axios.post<tokenResponse>("/auth/register", params);
+function deleteSecondaryRefreshToken() {
+  document.cookie =
+    'secondaryRefreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 }
-function login(params: loginParams) {
-  return axios.post<tokenResponse>("/auth/login", params);
+
+function register(params: RegisterParams) {
+  return axios.post<TokenResponse>('/auth/register', params);
+}
+function login(params: LoginParams) {
+  return axios.post<TokenResponse>('/auth/login', params);
 }
 function logout() {
-  return axios.get<tokenResponse>("/auth/logout");
+  return axios.get<TokenResponse>('/auth/logout', {
+    withCredentials: true
+  });
 }
 function getUserInfo() {
-  return axios.get<userData>("/auth/userinfo");
+  return axios.get<UserData>('/auth/userinfo');
 }
+
 export default {
   register,
   login,
   logout,
   getUserInfo,
+  deleteSecondaryRefreshToken
 };

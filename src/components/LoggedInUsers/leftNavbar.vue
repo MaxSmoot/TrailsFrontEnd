@@ -45,8 +45,8 @@
       </li>
       <li>
         <button
-          class="navWord"
           id="holler"
+          class="navWord"
           type="button"
           @click="showPost"
         >

@@ -1,38 +1,42 @@
 <template>
   <div>
     <ul>
-      <li
-        v-for="post in loadedPosts"
-        :key="post"
-      >
-        <p>
-          <b>{{ post.Username }}</b>
-        </p>
-        {{ post.body }}
+      <li v-for="post in loadedPosts" :key="post">
+        <postTemplate
+          :username="post.Username"
+          :uuid="post.id"
+          :body="post.body"
+          :timestamp="post.timestamp"
+        ></postTemplate>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import store from "@/store/index";
-import { computed, defineComponent, onBeforeMount } from "vue";
+import store from '@/store/index';
+import postTemplate from './post-template.vue';
+
+import { computed, defineComponent, onBeforeMount } from 'vue';
 export default defineComponent({
+  components: {
+    postTemplate
+  },
   setup() {
     const loadedPosts = computed(() => store.getters.posts);
     /**
-     * @todo implement error popup 
+     * @todo implement error popup
      */
     onBeforeMount(async () => {
       try {
-        await store.dispatch("getPosts");
+        await store.dispatch('getPosts');
       } catch (e) {
-        alert(e.message)
+        alert(e.message);
       }
     });
 
     return { loadedPosts };
-  },
+  }
 });
 </script>
 <style scoped lang="scss">
@@ -52,7 +56,5 @@ li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   overflow-wrap: break-word;
 }
-li:hover {
-  background-color: rgba(0, 0, 0, 0.021);
-}
+
 </style>

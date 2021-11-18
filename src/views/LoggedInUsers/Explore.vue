@@ -1,9 +1,9 @@
 <template>
   <pageTemplate>
     <input
+      id="searchTrails"
       type="search"
       name="searchTrails"
-      id="searchTrails"
       placeholder="Search Trails"
     >
   </pageTemplate>

@@ -2,8 +2,8 @@
   <div id="wrapper">
     <!-- Using the shared forms.css -->
     <form
-      @submit.prevent="onSubmit"
       class="form"
+      @submit.prevent="onSubmit"
     >
       <img
         class="x"
@@ -25,28 +25,28 @@
       </h3>
       <p>
         <input
-          placeholder="Email"
-          type="email"
           id="email"
           v-model.trim="email"
+          placeholder="Email"
+          type="email"
           class="formInput"
         >
       </p>
       <p>
         <input
-          placeholder="Password"
-          type="password"
           id="password"
           v-model.trim="password"
+          placeholder="Password"
+          type="password"
           class="formInput"
         >
       </p>
       <p id="staySignedInWrapper">
         Remember Me <input
+          v-model="rememberMe"
           type="checkbox"
           name="staySignedIn"
           class="staySignedIn"
-          v-model="rememberMe"
         >
       </p>
 

@@ -1,4 +1,4 @@
-export interface registerParams {
+export interface RegisterParams {
   username: string;
   password: string;
   firstName: string;
@@ -6,23 +6,23 @@ export interface registerParams {
   email: string;
   phone: string;
 }
-export interface loginParams {
+export interface LoginParams {
   email: string;
   password: string;
   rememberMe: boolean;
 }
-export interface tokenResponse {
+export interface TokenResponse {
   auth: boolean;
   token: string;
 }
-export interface userData{
+export interface UserData{
   Username: string;
   Phone: string;
   FName: string;
   LName: string;
   Email: string;
 }
-export interface posts{
+export interface Posts{
   Username: string;
   body: string;
   timestamp: string;

@@ -2,11 +2,11 @@ import axios from "../axios/index";
 import router from "../router/index";
 import { createStore } from "vuex";
 import {
-  registerParams,
-  tokenResponse,
-  loginParams,
-  userData,
-  posts,
+  RegisterParams,
+  TokenResponse,
+  LoginParams,
+  UserData,
+  Posts,
 } from "../types/index";
 import userService from "../auth/userService";
 import useLoadPosts from "@/components/LoggedInUsers/Home/compositions/use-LoadPosts";
@@ -20,9 +20,9 @@ export default createStore({
       LName: "",
       Phone: "",
       Email: "",
-    } as userData,
+    } as UserData,
     validRefreshToken: true,
-    posts: [] as Array<posts>,
+    posts: [] as Array<Posts>,
   },
   getters: {
     isAuthenticated: (state) => state.authStatus,
@@ -41,17 +41,17 @@ export default createStore({
     setAuthStatus(state, isAuth: boolean) {
       state.authStatus = isAuth;
     },
-    setUser(state, userData: userData) {
+    setUser(state, userData: UserData) {
       state.user = userData;
     },
-    setPosts(state, posts: Array<posts>) {
+    setPosts(state, posts: Array<Posts>) {
       state.posts = posts;
     },
   },
   actions: {
     async getToken({ commit }) {
       try {
-        const response = await axios.get<tokenResponse>("/auth/token");
+        const response = await axios.get<TokenResponse>("/auth/token");
         const token = response.data.token;
         commit("setToken", token);
         commit("setAuthStatus", true);
@@ -61,14 +61,14 @@ export default createStore({
         return false;
       }
     },
-    async register({ commit }, params: registerParams) {
+    async register({ commit }, params: RegisterParams) {
       const response = await userService.register(params);
       const token = response.data.token;
       commit("setToken", token);
       commit("setAuthStatus", true);
       router.push("Home");
     },
-    async login({ commit }, params: loginParams) {
+    async login({ commit }, params: LoginParams) {
       const response = await userService.login(params);
       const token = response.data.token;
       commit("setToken", token);
@@ -76,7 +76,8 @@ export default createStore({
       router.push("Home");
     },
     async logout({ commit }) {
-      await userService.logout();
+      await userService.logout().catch(()=>userService.deleteSecondaryRefreshToken());
+      userService.deleteSecondaryRefreshToken();
       commit("setToken", "");
       commit("setAuthStatus", false);
       router.push("/");

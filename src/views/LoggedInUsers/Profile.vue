@@ -16,7 +16,7 @@
 import pageTemplate from "../../components/LoggedInUsers/pageTemplate.vue";
 import store from "../../store/index";
 import { computed, defineComponent, onMounted } from "vue";
-import { userData } from "@/types";
+import { UserData } from "@/types";
 export default defineComponent({
   name: "Profile",
   components: {
@@ -26,7 +26,7 @@ export default defineComponent({
     onMounted(async ()=>{
       store.dispatch("getUserInfo");
     });
-    const userInfo = computed(()=>store.getters.userInfo as userData);
+    const userInfo = computed(()=>store.getters.userInfo as UserData);
     async function logout() {
       try {
         store.dispatch("logout");

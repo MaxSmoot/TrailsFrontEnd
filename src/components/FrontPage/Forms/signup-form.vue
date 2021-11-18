@@ -1,8 +1,8 @@
 <template>
   <div id="wrapper">
     <form
-      @submit.prevent
       class="form"
+      @submit.prevent
     >
       <img
         class="x"
@@ -16,62 +16,62 @@
       >{{ errorMessage }}</pre>
       <p>
         <input
-          type="email"
-          placeholder="Email"
           id="emailbox"
           v-model.trim="email"
+          type="email"
+          placeholder="Email"
           class="formInput"
           :class="{invalid:!validEmail, valid:validEmail}"
         >
       </p>
       <button
+        v-if="!emailEntered"
         type="button"
-        @click="emailEntered = true"
         :disabled="!validEmail"
         :class="{disabled:!validEmail}"
-        v-if="!emailEntered"
+        @click="emailEntered = true"
       >
         Sign Up
       </button>
       <div
-        id="fullForm"
         v-if="emailEntered"
+        id="fullForm"
       >
         <p>
           <input
-            type="text"
             id="username"
-            placeholder="Username"
             v-model.trim="username"
+            type="text"
+            placeholder="Username"
             class="formInput"
             :class="{invalid:!validUsername, valid:validUsername}"
           >
         </p>
         <p>
           <input
-            type="text"
-            placeholder="First Name"
             id="firstName"
             v-model.trim="firstName"
+            type="text"
+            placeholder="First Name"
             class="formInput"
             :class="{invalid:!validFirstName, valid:validFirstName}"
           >
         </p>
         <p>
           <input
-            type="text"
             id="lastName"
-            placeholder="Last Name"
             v-model.trim="lastName"
+            type="text"
+            placeholder="Last Name"
             class="formInput"
             :class="{invalid:!validLastName, valid:validLastName}"
           >
         </p>
         <p>
           <input
-            type="tel"
             id="phoneNumber"
             v-model="phoneNumber"
+            type="tel"
             placeholder="Phone Number"
             class="formInput"
             maxlength="10"
@@ -79,8 +79,8 @@
         </p>
         <p>     
           <ul
-            id="passwordRequirements"
             v-if="passwordFocused"
+            id="passwordRequirements"
           >
             <li>Must be at least 8 characters long</li>
             <li>Uppercase Letter</li>
@@ -89,20 +89,20 @@
             <li>Special Character (#?!@$%^&amp;*-)</li>
           </ul>
           <input
-            type="password"
-            placeholder="Password"
             id="password"
             v-model.trim="password"
+            type="password"
+            placeholder="Password"
             class="formInput"
             :class="{invalid:!validPassword, valid:validPassword}"
           >
         </p>
         <button
           id="submit"
-          @click="onSubmit"
           type="button"
           :disabled="!validForm"
           :class="{disabled:!validForm}"
+          @click="onSubmit"
         >
           Submit
         </button>
@@ -115,7 +115,7 @@
 import { validate } from "../../Forms/HelperModules/validation";
 import {computed, ref, defineComponent} from 'vue';
 import store from '../../../store/index'
-import {registerParams} from "../../../types/index"
+import {RegisterParams} from "../../../types/index"
 export default defineComponent({
   name: "SignupForm",
   emits: ['close'],
@@ -140,7 +140,7 @@ export default defineComponent({
      * @todo implement form submission
      */
     async function onSubmit() {
-      const data: registerParams = {
+      const data: RegisterParams = {
         email: email.value,
         username: username.value,
         firstName: firstName.value,

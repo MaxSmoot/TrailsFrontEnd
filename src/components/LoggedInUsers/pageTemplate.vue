@@ -1,8 +1,8 @@
 <template>
   <div id="homeWrapper">
-    <div id="newPostPopUp" v-if="showNewPost">
+    <div v-if="showNewPost" id="newPostPopUp">
       <div id="writePost">
-        <writePost @close="showNewPost = !showNewPost" :show-x="true" />
+        <writePost :show-x="true" @close="showNewPost = !showNewPost" />
       </div>
     </div>
     <div id="left">
